@@ -2,7 +2,7 @@ const Users = () => {
     return (
         <div>
             <h1>Users Component</h1>
-            <h3>Users list</h3>
+            <h2>Test</h2>
         </div>
     );
 };
