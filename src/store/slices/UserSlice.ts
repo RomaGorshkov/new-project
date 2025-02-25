@@ -1,33 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { renameUser } from '../reducers/user';
 
-interface UserState {
-    id: number;
-    users: string;
-    isLoading: boolean;
-    editMode: boolean;
-    error: string;
-}
-
-const initialState: UserState = {
-    id: 1,
-    users: 'Roma',
-    isLoading: false,
-    editMode: false,
-    error: '',
-};
-
-export const userSlice = createSlice({
-    name: 'user',
-    initialState,
-    reducers: {
-        renameUser: (state, action: PayloadAction<string>) => {
-            state.users = action.payload;
-        },
-        toggleEditMode: (state) => {
-            state.editMode = !state.editMode;
-        },
-    },
+export const getUser = createAsyncThunk<void, string>('getUser', async (data: string, thunkAPI) => {
+    thunkAPI.dispatch(renameUser(data));
 });
-
-export const { renameUser, toggleEditMode } = userSlice.actions;
-export default userSlice.reducer;

@@ -1,21 +1,30 @@
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
-import { renameUser, toggleEditMode } from '../../../store/slices/UserSlice';
+import { toggleEditMode } from '../../../store/reducers/user';
+import { getUser } from '../../../store/slices/UserSlice';
 
 const Users = () => {
     const dispatch = useAppDispatch();
     const { users, editMode } = useAppSelector((state) => state.userReducer);
     const [user, setUser] = useState(users);
 
+    const changeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUser(e.target.value);
+    };
+
+    const changeEditMode = () => {
+        dispatch(getUser(user));
+        dispatch(toggleEditMode());
+    };
+
     return (
         <div>
             {editMode ? (
                 <>
-                    <input value={user} onChange={(e) => setUser(e.target.value)} />
+                    <input value={user} onChange={(e) => changeUser(e)} />
                     <button
                         onClick={() => {
-                            dispatch(renameUser(user));
-                            dispatch(toggleEditMode());
+                            changeEditMode();
                         }}
                     >
                         Save
@@ -24,7 +33,7 @@ const Users = () => {
             ) : (
                 <>
                     <span>{users}</span>
-                    <button onClick={() => dispatch(toggleEditMode())}>Edit</button>
+                    <button onClick={() => changeEditMode()}>Edit</button>
                 </>
             )}
         </div>
