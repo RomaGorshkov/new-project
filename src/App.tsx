@@ -12,11 +12,8 @@ const App: React.FC = () => {
         <div className="App">
             <Header />
             <Routes>
-<<<<<<< HEAD
                 <Route path="/users" element={<UsersPage />} />
-=======
                 <Route path="/" element={<UsersPage />} />
->>>>>>> bb005e437e4526c84cbecfa077f159c4cc92efab
                 <Route path="users-edit" element={<UsersEditPage />} />
             </Routes>
         </div>
