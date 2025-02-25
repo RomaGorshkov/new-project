@@ -3,4 +3,5 @@ import { renameUser } from '../reducers/user';
 
 export const getUser = createAsyncThunk<void, string>('getUser', async (data: string, thunkAPI) => {
     thunkAPI.dispatch(renameUser(data));
+    localStorage.setItem('users', data);
 });

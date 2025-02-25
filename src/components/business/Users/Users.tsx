@@ -1,7 +1,8 @@
 import { useState } from 'react';
+
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { toggleEditMode } from '../../../store/reducers/user';
-import { getUser } from '../../../store/slices/UserSlice';
+import { getUser } from '../../../store/slices/userSlice';
 
 const Users = () => {
     const dispatch = useAppDispatch();

@@ -10,7 +10,7 @@ interface UserState {
 
 const initialState: UserState = {
     id: 1,
-    users: 'Roma',
+    users: localStorage.getItem('users') || '',
     isLoading: false,
     editMode: false,
     error: '',
