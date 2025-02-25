@@ -12,7 +12,6 @@ const App: React.FC = () => {
         <div className="App">
             <Header />
             <Routes>
-                <Route path="/users" element={<UsersPage />} />
                 <Route path="/" element={<UsersPage />} />
                 <Route path="users-edit" element={<UsersEditPage />} />
             </Routes>
