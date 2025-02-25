@@ -34,7 +34,7 @@ const Users = () => {
             ) : (
                 <>
                     <span>{users}</span>
-                    <button onClick={() => changeEditMode()}>Edit</button>
+                    <button onClick={changeEditMode}>Edit</button>
                 </>
             )}
         </div>
