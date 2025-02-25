@@ -6,13 +6,13 @@ const config = {
     printWidth: 120, // Встановлює максимальну ширину рядка
     bracketSpacing: true, // Додає пробіли між елементами в об'єктах
     overrides: [
-      {
-        files: ['*.js', '*.jsx', '*.ts', '*.tsx'], // Для цих файлів використовуємо інші налаштування
-        options: {
-          singleQuote: true, // Використовуємо одинарні лапки для цих файлів
+        {
+            files: ['*.js', '*.jsx', '*.ts', '*.tsx'], // Для цих файлів використовуємо інші налаштування
+            options: {
+                singleQuote: true, // Використовуємо одинарні лапки для цих файлів
+            },
         },
-      },
     ],
-  };
-  
-  export default config;
+};
+
+export default config;
