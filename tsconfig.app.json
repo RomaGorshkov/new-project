@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo", // Шлях до файлу для збереження інформації про побудову
+    "target": "ES2020", // Визначає цільову версію ECMAScript
+    "useDefineForClassFields": true, // Для підтримки ESNext
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Додає типи для ES2020 та DOM
+    "module": "ESNext", // Використовує модулі ESNext
+    "skipLibCheck": true, // Пропускає перевірку типів у бібліотеках
+    "moduleResolution": "bundler", // Використовує стратегію для бандлерів
+    "allowImportingTsExtensions": true, // Дозволяє імпортувати файли з розширенням .ts
+    "isolatedModules": true, // Вмикає режим ізольованих модулів
+    "moduleDetection": "force", // Примусове виявлення модулів
+    "noEmit": true, // Не генерує вихідний код
+    "jsx": "react-jsx", // Використовує JSX для React
+    "strict": true, // Включає строгий режим типізації
+    "noUnusedLocals": true, // Попереджає про невикористовувані локальні змінні
+    "noUnusedParameters": true, // Попереджає про невикористовувані параметри функцій
+    "noFallthroughCasesInSwitch": true, // Попереджає про пропущені випадки у switch
+    "noUncheckedSideEffectImports": true, // Попереджає про імпорти, що можуть мати побічні ефекти
+    "types": ["@types/eslint"], // Додає типи ESLint для інтеграції з ESLint
+    "skipDefaultLibCheck": true // Пропускає перевірку стандартних бібліотек
+  },
+  "include": [
+    "src/**/*" // Включає всі файли з папки src
+  ]
+}
