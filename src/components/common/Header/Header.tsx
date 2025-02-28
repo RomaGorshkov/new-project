@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { NavLink } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 import './Header.css';
-import { Grid } from '@mui/material';
 
 const Header: React.FC = () => {
     return (

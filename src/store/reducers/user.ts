@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+
 import { IUsers } from '../../types';
 import { users } from '../../mockData/mockData';
 

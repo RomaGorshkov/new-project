@@ -9,12 +9,13 @@ import './Users.css';
 
 const Users: React.FC = () => {
     const { users } = useAppSelector((state) => state.userReducer);
+
     return (
         <Grid className="users">
             <Grid className="usersHeader">U S E R S</Grid>
             <Grid className="usersTable">
                 <TableContainer component={Paper}>
-                    <Table sx={{ border: '1px solid rgb(224, 220, 224)', padding: '10px' }}>
+                    <Table>
                         <TableHead>
                             <TableCell sx={{ fontWeight: 'bold' }}>Full Name</TableCell>
                             <TableCell sx={{ fontWeight: 'bold' }}>Department</TableCell>
