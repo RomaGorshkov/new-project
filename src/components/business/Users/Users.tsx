@@ -1,43 +1,40 @@
-import { useState } from 'react';
+import React from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../../store/hooks';
-import { toggleEditMode } from '../../../store/reducers/user';
-import { getUser } from '../../../store/slices/userSlice';
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import Paper from '@mui/material/Paper';
 
-const Users = () => {
-    const dispatch = useAppDispatch();
-    const { users, editMode } = useAppSelector((state) => state.userReducer);
-    const [user, setUser] = useState(users);
+import { useAppSelector } from '../../../store/hooks';
 
-    const changeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUser(e.target.value);
-    };
+import './Users.css';
 
-    const changeEditMode = () => {
-        dispatch(getUser(user));
-        dispatch(toggleEditMode());
-    };
-
+const Users: React.FC = () => {
+    const { users } = useAppSelector((state) => state.userReducer);
     return (
-        <div>
-            {editMode ? (
-                <>
-                    <input value={user} onChange={(e) => changeUser(e)} />
-                    <button
-                        onClick={() => {
-                            changeEditMode();
-                        }}
-                    >
-                        Save
-                    </button>
-                </>
-            ) : (
-                <>
-                    <span>{users}</span>
-                    <button onClick={changeEditMode}>Edit</button>
-                </>
-            )}
-        </div>
+        <Grid className="users">
+            <Grid className="usersHeader">U S E R S</Grid>
+            <Grid className="usersTable">
+                <TableContainer component={Paper}>
+                    <Table sx={{ border: '1px solid rgb(224, 220, 224)', padding: '10px' }}>
+                        <TableHead>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Full Name</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Department</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Country</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
+                        </TableHead>
+                        <TableBody>
+                            {users.map((user) => (
+                                <TableRow key={user.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                    <TableCell>{user.name}</TableCell>
+                                    <TableCell>{user.department.name}</TableCell>
+                                    <TableCell>{user.country.name}</TableCell>
+                                    <TableCell>{user.status.name}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Grid>
+        </Grid>
     );
 };
 

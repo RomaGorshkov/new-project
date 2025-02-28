@@ -1,33 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IUsers } from '../../types';
+import { users } from '../../mockData/mockData';
 
 interface UserState {
-    id: number;
-    users: string;
+    users: IUsers[];
     isLoading: boolean;
-    editMode: boolean;
     error: string;
 }
 
 const initialState: UserState = {
-    id: 1,
-    users: localStorage.getItem('users') || '',
+    users: users,
     isLoading: false,
-    editMode: false,
     error: '',
 };
 
 export const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {
-        renameUser: (state, action: PayloadAction<string>) => {
-            state.users = action.payload;
-        },
-        toggleEditMode: (state) => {
-            state.editMode = !state.editMode;
-        },
-    },
+    reducers: {},
 });
 
-export const { renameUser, toggleEditMode } = userSlice.actions;
 export default userSlice.reducer;

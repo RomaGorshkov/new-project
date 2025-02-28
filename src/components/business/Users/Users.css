@@ -1,0 +1,20 @@
+.users {
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    min-height: 75vh;
+    border: 2px solid #000;
+}
+
+.usersHeader {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px;
+}
+
+.usersTable {
+    padding: 10px;
+}

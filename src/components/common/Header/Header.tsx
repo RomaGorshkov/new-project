@@ -1,16 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-import "./Header.css";
+import './Header.css';
+import { Grid } from '@mui/material';
 
 const Header: React.FC = () => {
-  return (
-    <nav>
-      <NavLink to="/">Users</NavLink>
-      <NavLink to="/users-edit">UsersEdit</NavLink>
-    </nav>
-  );
+    return (
+        <Grid className="header" container spacing={2}>
+            <Grid item>
+                <NavLink to="/">Users</NavLink>
+                <NavLink to="/users-edit">Edit Users</NavLink>
+            </Grid>
+        </Grid>
+    );
 };
 
 export default Header;
