@@ -10,6 +10,8 @@ import './Users.css';
 const Users: React.FC = () => {
     const { users } = useAppSelector((state) => state.userReducer);
 
+    const headerColumns: string[] = ['Full Name', 'Department', 'Country', 'Status'];
+
     return (
         <Grid className="users">
             <Grid className="usersHeader">U S E R S</Grid>
@@ -17,10 +19,11 @@ const Users: React.FC = () => {
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
-                            <TableCell sx={{ fontWeight: 'bold' }}>Full Name</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold' }}>Department</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold' }}>Country</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
+                            {headerColumns.map((item) => (
+                                <TableCell key={item} sx={{ fontWeight: 'bold' }}>
+                                    {item}
+                                </TableCell>
+                            ))}
                         </TableHead>
                         <TableBody>
                             {users.map((user) => (
