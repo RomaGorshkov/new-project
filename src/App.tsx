@@ -5,8 +5,6 @@ import Header from './components/common/Header/Header';
 import UsersPage from './pages/UsersPage/UsersPage';
 import UsersEditPage from './pages/UsersEditPage/UsersEditPage';
 
-import './App.css';
-
 const App: React.FC = () => {
     return (
         <div className="App">
