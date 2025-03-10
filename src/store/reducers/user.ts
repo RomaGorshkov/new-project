@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { IUsers } from '../../types';
-import { users } from '../../mockData/mockData';
 
 interface UserState {
     users: IUsers[];
@@ -10,7 +9,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
-    users: users,
+    users: JSON.parse(localStorage.getItem('users') || ''),
     isLoading: false,
     error: '',
 };
@@ -21,10 +20,18 @@ export const userSlice = createSlice({
     reducers: {
         addUser: (state, action) => {
             state.users.push(action.payload);
+            localStorage.setItem('users', JSON.stringify(state.users));
+        },
+        deleteUser(state, action) {
+            const index = state.users.findIndex((user) => user.id === action.payload);
+            if (index !== -1) {
+                state.users.splice(index, 1);
+                localStorage.setItem('users', JSON.stringify(state.users));
+            }
         },
     },
 });
 
-export const { addUser } = userSlice.actions;
+export const { addUser, deleteUser } = userSlice.actions;
 
 export default userSlice.reducer;
