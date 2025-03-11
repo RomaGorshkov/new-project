@@ -20,3 +20,10 @@ interface ICountry {
     name: string;
     value: string;
 }
+
+export interface IValidationUserSchema {
+    fullName: string;
+    stateDepartment: string;
+    stateCountry: string;
+    stateStatus: string;
+}
