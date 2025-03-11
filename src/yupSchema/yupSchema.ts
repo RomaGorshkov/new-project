@@ -1,11 +1,6 @@
 import * as Yup from 'yup';
 
-interface IValidationUserSchema {
-    fullName: string;
-    stateDepartment: string;
-    stateCountry: string;
-    stateStatus: string;
-}
+import { IValidationUserSchema } from '../types';
 
 export const validationUserSchema: Yup.ObjectSchema<IValidationUserSchema> = Yup.object({
     fullName: Yup.string()

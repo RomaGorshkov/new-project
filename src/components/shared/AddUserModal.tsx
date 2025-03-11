@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, FormControl, Grid, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material';
+import { Button, Grid, Modal, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 
 import { usersData } from '../../mockData/mockData';
 import { getFilter } from '../../utils/usersFilter';
 import { addUser } from '../../store/reducers/user';
 import { validationUserSchema } from '../../yupSchema/yupSchema';
+import CustomSelect from './customSelect';
 
 import styles from './AddUserModal.module.scss';
 
@@ -68,69 +69,16 @@ const AddUserModal: React.FC<IAddUserModalProps> = ({ open, setOpen }) => {
                                 helperText={formik.touched.fullName && formik.errors.fullName}
                                 required
                             />
-                            <FormControl
-                                sx={{ minWidth: 250 }}
-                                required
-                                error={formik.touched.stateDepartment && Boolean(formik.errors.stateDepartment)}
-                            >
-                                <InputLabel id="department-label">Department</InputLabel>
-                                <Select
-                                    variant="outlined"
-                                    labelId="department-label"
-                                    name="stateDepartment"
-                                    value={formik.values.stateDepartment}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                >
-                                    {department.map((dep, index) => (
-                                        <MenuItem key={index} value={dep}>
-                                            {dep}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <CustomSelect
+                                name="stateDepartment"
+                                label="Department"
+                                options={department}
+                                formik={formik}
+                            />
                         </Grid>
                         <Grid className={styles.modal__selected}>
-                            <FormControl
-                                sx={{ minWidth: 250 }}
-                                required
-                                error={formik.touched.stateCountry && Boolean(formik.errors.stateCountry)}
-                            >
-                                <InputLabel id="country-label">Country</InputLabel>
-                                <Select
-                                    labelId="country-label"
-                                    name="stateCountry"
-                                    value={formik.values.stateCountry}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                >
-                                    {country.map((ctry, index) => (
-                                        <MenuItem key={index} value={ctry}>
-                                            {ctry}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                            <FormControl
-                                sx={{ minWidth: 250 }}
-                                required
-                                error={formik.touched.stateStatus && Boolean(formik.errors.stateStatus)}
-                            >
-                                <InputLabel id="status-label">Status</InputLabel>
-                                <Select
-                                    labelId="status-label"
-                                    name="stateStatus"
-                                    value={formik.values.stateStatus}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                >
-                                    {status.map((stat, index) => (
-                                        <MenuItem key={index} value={stat}>
-                                            {stat}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            <CustomSelect name="stateCountry" label="Country" options={country} formik={formik} />
+                            <CustomSelect name="stateStatus" label="Status" options={status} formik={formik} />
                         </Grid>
                     </Grid>
                     <Grid className={styles.modal__buttons}>
