@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { Button, Grid, Modal, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 
-import { usersData } from '../../mockData/mockData';
-import { getFilter } from '../../utils/usersFilter';
-import { addUser } from '../../store/reducers/user';
-import { validationUserSchema } from '../../yupSchema/yupSchema';
-import CustomSelect from './customSelect';
+import { usersData } from '../../../mockData/mockData';
+import { getFilter } from '../../../utils/usersFilter';
+import { addUser } from '../../../store/reducers/user';
+import { validationUserSchema } from '../../../yupSchema/yupSchema';
+import CustomSelect from '../CustomSelect/CustomSelect';
 
 import styles from './AddUserModal.module.scss';
 

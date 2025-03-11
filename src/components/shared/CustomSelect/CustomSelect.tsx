@@ -2,7 +2,7 @@ import React from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { FormikProps } from 'formik';
 
-import { IValidationUserSchema } from '../../types';
+import { IValidationUserSchema } from '../../../types';
 
 interface ICustomSelectProps {
     name: keyof IValidationUserSchema;

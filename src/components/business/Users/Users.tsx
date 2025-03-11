@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { deleteUser } from '../../../store/reducers/user';
 
-import AddUserModal from '../../shared/AddUserModal';
+import AddUserModal from '../../shared/AddUserModal/AddUserModal';
 
 import { addUserID } from '../../../utils/addUserId';
 
