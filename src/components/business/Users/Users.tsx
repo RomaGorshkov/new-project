@@ -5,11 +5,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from '@mui/material/Paper';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { deleteUser } from '../../../store/reducers/user';
 
 import AddUserModal from '../../shared/AddUserModal';
 
 import { addUserID } from '../../../utils/addUserId';
-import { deleteUser } from '../../../store/reducers/user';
 
 import styles from './Users.module.scss';
 
@@ -27,8 +27,8 @@ const Users: React.FC = () => {
 
     const handleOpen = () => setOpen(!open);
 
-    const handleDelete = (id: string) => {
-        dispatch(deleteUser(id));
+    const handleDelete = async (id: string) => {
+        await dispatch(deleteUser(id));
     };
 
     return (
@@ -42,17 +42,17 @@ const Users: React.FC = () => {
             </Grid>
             <Grid className={styles.users__table}>
                 <TableContainer component={Paper}>
-                    {users.length ? (
-                        <Table>
-                            <TableHead>
-                                {headerColumns.map((item) => (
-                                    <TableCell key={item} sx={{ fontWeight: 'bold' }}>
-                                        {item}
-                                    </TableCell>
-                                ))}
-                            </TableHead>
-                            <TableBody>
-                                {users.map((user) => (
+                    <Table>
+                        <TableHead>
+                            {headerColumns.map((item) => (
+                                <TableCell key={item} sx={{ fontWeight: 'bold' }}>
+                                    {item}
+                                </TableCell>
+                            ))}
+                        </TableHead>
+                        <TableBody>
+                            {users.length ? (
+                                users.map((user) => (
                                     <TableRow key={user.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                         <TableCell>{user.name}</TableCell>
                                         <TableCell>{user.department.name}</TableCell>
@@ -65,23 +65,16 @@ const Users: React.FC = () => {
                                             />
                                         </TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    ) : (
-                        <>
-                            <Table>
-                                <TableHead>
-                                    {headerColumns.map((item) => (
-                                        <TableCell key={item} sx={{ fontWeight: 'bold' }}>
-                                            {item}
-                                        </TableCell>
-                                    ))}
-                                </TableHead>
-                            </Table>
-                            <Grid className={styles.users__noUsersHeader}>Please add users</Grid>
-                        </>
-                    )}
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={headerColumns.length} sx={{ textAlign: 'center', py: 2 }}>
+                                        Please add users
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
                 </TableContainer>
             </Grid>
         </Grid>

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, FormControl, Grid, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material';
 
-import styles from './AddUserModal.module.scss';
-
 import { usersData } from '../../mockData/mockData';
 import { getFilter } from '../../utils/usersFilter';
 import { addUser } from '../../store/reducers/user';
+
+import styles from './AddUserModal.module.scss';
 
 interface IAddUserModalProps {
     open: boolean;
