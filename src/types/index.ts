@@ -1,4 +1,5 @@
 export interface IUsers {
+    id: string;
     name: string;
     status: IStatus;
     department: IDepartment;
