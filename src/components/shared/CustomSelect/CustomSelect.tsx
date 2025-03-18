@@ -4,19 +4,24 @@ import { FormikProps } from 'formik';
 
 import { IValidationUserSchema } from '../../../types';
 
+import { SxProps, Theme } from '@mui/system';
+
 interface ICustomSelectProps {
+    sx?: SxProps<Theme>;
     name: keyof IValidationUserSchema;
     label: string;
     options: string[];
     formik: FormikProps<IValidationUserSchema>;
 }
 
-const CustomSelect: React.FC<ICustomSelectProps> = ({ name, label, options, formik }) => {
+const CustomSelect: React.FC<ICustomSelectProps> = ({ sx, name, label, options, formik }) => {
     return (
-        <FormControl sx={{ minWidth: 250 }} required error={formik.touched[name] && Boolean(formik.errors[name])}>
+        <FormControl required error={formik?.touched[name] && Boolean(formik.errors[name])}>
             <InputLabel id={`${name}-label`}>{label}</InputLabel>
             <Select
+                sx={sx}
                 labelId={`${name}-label`}
+                label={label}
                 name={name}
                 value={formik.values[name]}
                 onChange={formik.handleChange}
