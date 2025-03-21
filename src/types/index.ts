@@ -26,4 +26,5 @@ export interface IValidationUserSchema {
     stateDepartment: string;
     stateCountry: string;
     stateStatus: string;
+    selectedUser: string;
 }

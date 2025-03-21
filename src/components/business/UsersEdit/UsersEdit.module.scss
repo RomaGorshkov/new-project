@@ -1,0 +1,44 @@
+.usersEdit {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 50vw;
+    min-height: 75vh;
+    border: 2px solid #000;
+    padding: 10px;
+    margin-top: 80px;
+
+    &__header {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    &__sectionTitle {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+
+        button {
+            margin-left: 10px;
+            width: 120px;
+        }
+    }
+
+    &__undo {
+        border-color: #000;
+        color: #000;
+    }
+
+    &__save {
+        background-color: #ddd;
+        color: #888;
+    }
+}
