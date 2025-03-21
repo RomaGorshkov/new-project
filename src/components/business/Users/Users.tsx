@@ -62,6 +62,7 @@ const Users: React.FC = () => {
             stateDepartment: '',
             stateCountry: '',
             stateStatus: '',
+            selectedUser: '',
         },
         onSubmit: () => {},
     });
@@ -81,7 +82,7 @@ const Users: React.FC = () => {
             <Grid className={styles.users__body}>
                 <form onSubmit={formik.handleSubmit}>
                     <Grid className={styles.users__menuFilters}>
-                        <Grid className={styles.users__filters}>
+                        <Grid className={styles.users__filters} xs={12} xl={2}>
                             <TextField
                                 sx={{ width: '150px' }}
                                 placeholder="Search by name"
@@ -92,25 +93,22 @@ const Users: React.FC = () => {
                                 onBlur={formik.handleBlur}
                             />
                             <CustomSelect
-                                sx={{ width: '125px' }}
+                                sx={{ width: '150px' }}
                                 name="stateDepartment"
-                                // id="department-select"
                                 label="Department"
                                 options={department}
                                 formik={formik}
                             />
                             <CustomSelect
-                                sx={{ width: '125px' }}
+                                sx={{ width: '150px' }}
                                 name="stateCountry"
-                                // id="country-select"
                                 label="Country"
                                 options={country}
                                 formik={formik}
                             />
                             <CustomSelect
-                                sx={{ width: '125px' }}
+                                sx={{ width: '150px' }}
                                 name="stateStatus"
-                                // id="status-select"
                                 label="Status"
                                 options={status}
                                 formik={formik}
@@ -120,6 +118,7 @@ const Users: React.FC = () => {
                                 onClick={() => {
                                     formik.resetForm();
                                     setFilteredUsers(users);
+                                    setSearchText('');
                                 }}
                             />
                         </Grid>
@@ -144,10 +143,7 @@ const Users: React.FC = () => {
                             <TableBody>
                                 {filteredUsers.length ? (
                                     filteredUsers.map((user) => (
-                                        <TableRow
-                                            key={user.id}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        >
+                                        <TableRow key={user.id}>
                                             <TableCell>{user.name}</TableCell>
                                             <TableCell>{user.department.name}</TableCell>
                                             <TableCell>{user.country.name}</TableCell>
