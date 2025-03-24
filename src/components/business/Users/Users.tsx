@@ -15,17 +15,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useFormik } from 'formik';
 
 import { useAppDispatch, useAppSelector } from '../../../store/storeHooks';
-import { deleteUser } from '../../../store/reducers/user';
 import { useDebounce } from '../../../hooks/useDebounce';
+import { deleteUser } from '../../../store/reducers/user';
 
 import AddUserModal from '../../shared/AddUserModal/AddUserModal';
 import CustomSelect from '../../shared/CustomSelect/CustomSelect';
+import UsersLayout from '../../../layouts/usersLayout';
 
 import { addUserID } from '../../../utils/addUserId';
-import { getFilter } from '../../../utils/usersFilter';
-import { usersData } from '../../../mockData/mockData';
 import { searchFilter } from '../../../utils/searchFilter';
 import { IUsers } from '../../../types';
+import useUserFilters from '../../../utils/getFilter';
 
 import styles from './Users.module.scss';
 
@@ -40,9 +40,7 @@ const Users: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const department = getFilter(usersData, 'department', 'name');
-    const country = getFilter(usersData, 'country', 'name');
-    const status = getFilter(usersData, 'status', 'name');
+    const { department, country, status } = useUserFilters();
 
     const handleOpen = () => setOpen(!open);
 
@@ -77,98 +75,95 @@ const Users: React.FC = () => {
     }, [formik.values, users, debouncedSearchText]);
 
     return (
-        <Grid className={styles.users}>
-            <Grid className={styles.users__header}>U S E R S</Grid>
-            <Grid className={styles.users__body}>
-                <form onSubmit={formik.handleSubmit}>
-                    <Grid className={styles.users__menuFilters}>
-                        <Grid className={styles.users__filters} xs={12} xl={2}>
-                            <TextField
-                                sx={{ width: '150px' }}
-                                placeholder="Search by name"
-                                variant="outlined"
-                                name="fullName"
-                                value={searchText}
-                                onChange={handleSearchChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            <CustomSelect
-                                sx={{ width: '150px' }}
-                                name="stateDepartment"
-                                label="Department"
-                                options={department}
-                                formik={formik}
-                            />
-                            <CustomSelect
-                                sx={{ width: '150px' }}
-                                name="stateCountry"
-                                label="Country"
-                                options={country}
-                                formik={formik}
-                            />
-                            <CustomSelect
-                                sx={{ width: '150px' }}
-                                name="stateStatus"
-                                label="Status"
-                                options={status}
-                                formik={formik}
-                            />
-                            <DeleteIcon
-                                className={styles.users__deleteButton}
-                                onClick={() => {
-                                    formik.resetForm();
-                                    setFilteredUsers(users);
-                                    setSearchText('');
-                                }}
-                            />
-                        </Grid>
-                        <Grid className={styles.users__addButton}>
-                            <Button onClick={handleOpen} variant="outlined" color="primary">
-                                Add User
-                            </Button>
-                        </Grid>
+        <UsersLayout title="U S E R S">
+            <form onSubmit={formik.handleSubmit}>
+                <Grid className={styles.users__menuFilters}>
+                    <Grid className={styles.users__filters} xs={12} xl={2}>
+                        <TextField
+                            sx={{ width: '150px' }}
+                            placeholder="Search by name"
+                            variant="outlined"
+                            name="fullName"
+                            value={searchText}
+                            onChange={handleSearchChange}
+                            onBlur={formik.handleBlur}
+                        />
+                        <CustomSelect
+                            sx={{ width: '150px' }}
+                            name="stateDepartment"
+                            label="Department"
+                            options={department}
+                            formik={formik}
+                        />
+                        <CustomSelect
+                            sx={{ width: '150px' }}
+                            name="stateCountry"
+                            label="Country"
+                            options={country}
+                            formik={formik}
+                        />
+                        <CustomSelect
+                            sx={{ width: '150px' }}
+                            name="stateStatus"
+                            label="Status"
+                            options={status}
+                            formik={formik}
+                        />
+                        <DeleteIcon
+                            className={styles.users__deleteButton}
+                            onClick={() => {
+                                formik.resetForm();
+                                setFilteredUsers(users);
+                                setSearchText('');
+                            }}
+                        />
                     </Grid>
-                </form>
-                <AddUserModal open={open} setOpen={setOpen} department={department} country={country} status={status} />
-                <Grid className={styles.users__table}>
-                    <TableContainer component={Paper}>
-                        <Table>
-                            <TableHead>
-                                {headerColumns.map((item) => (
-                                    <TableCell key={item} sx={{ fontWeight: 'bold' }}>
-                                        {item}
-                                    </TableCell>
-                                ))}
-                            </TableHead>
-                            <TableBody>
-                                {filteredUsers.length ? (
-                                    filteredUsers.map((user) => (
-                                        <TableRow key={user.id}>
-                                            <TableCell>{user.name}</TableCell>
-                                            <TableCell>{user.department.name}</TableCell>
-                                            <TableCell>{user.country.name}</TableCell>
-                                            <TableCell>{user.status.name}</TableCell>
-                                            <TableCell>
-                                                <DeleteIcon
-                                                    onClick={() => handleDelete(user.id)}
-                                                    className={styles.users__deleteButton}
-                                                />
-                                            </TableCell>
-                                        </TableRow>
-                                    ))
-                                ) : (
-                                    <TableRow>
-                                        <TableCell colSpan={headerColumns.length} sx={{ textAlign: 'center', py: 2 }}>
-                                            No users found
+                    <Grid className={styles.users__addButton}>
+                        <Button onClick={handleOpen} variant="outlined" color="primary">
+                            Add User
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form>
+            <AddUserModal open={open} setOpen={setOpen} department={department} country={country} status={status} />
+            <Grid className={styles.users__table}>
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            {headerColumns.map((item) => (
+                                <TableCell key={item} sx={{ fontWeight: 'bold' }}>
+                                    {item}
+                                </TableCell>
+                            ))}
+                        </TableHead>
+                        <TableBody>
+                            {filteredUsers.length ? (
+                                filteredUsers.map((user) => (
+                                    <TableRow key={user.id}>
+                                        <TableCell>{user.name}</TableCell>
+                                        <TableCell>{user.department.name}</TableCell>
+                                        <TableCell>{user.country.name}</TableCell>
+                                        <TableCell>{user.status.name}</TableCell>
+                                        <TableCell>
+                                            <DeleteIcon
+                                                onClick={() => handleDelete(user.id)}
+                                                className={styles.users__deleteButton}
+                                            />
                                         </TableCell>
                                     </TableRow>
-                                )}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Grid>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={headerColumns.length} sx={{ textAlign: 'center', py: 2 }}>
+                                        No users found
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Grid>
-        </Grid>
+        </UsersLayout>
     );
 };
 

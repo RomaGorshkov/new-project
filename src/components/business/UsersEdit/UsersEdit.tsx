@@ -3,11 +3,11 @@ import { Grid, TextField, Button } from '@mui/material';
 import { useFormik } from 'formik';
 
 import { useAppDispatch, useAppSelector } from '../../../store/storeHooks';
-import { getFilter } from '../../../utils/usersFilter';
-import { usersData } from '../../../mockData/mockData';
+import useUserFilters from '../../../utils/getFilter';
 
 import CustomSelect from '../../shared/CustomSelect/CustomSelect';
 import { updateUser } from '../../../store/reducers/user';
+import UsersLayout from '../../../layouts/usersLayout';
 
 import styles from './UsersEdit.module.scss';
 
@@ -19,9 +19,7 @@ const UsersEdit: React.FC = () => {
 
     const userOptions = users.map((user) => user.name);
 
-    const department = getFilter(usersData, 'department', 'name');
-    const country = getFilter(usersData, 'country', 'name');
-    const status = getFilter(usersData, 'status', 'name');
+    const { department, country, status } = useUserFilters();
 
     const formik = useFormik({
         initialValues: {
@@ -66,9 +64,8 @@ const UsersEdit: React.FC = () => {
     }, [formik.values.selectedUser]);
 
     return (
-        <form onSubmit={formik.handleSubmit}>
-            <Grid className={styles.usersEdit}>
-                <Grid className={styles.usersEdit__header}>EDIT USER</Grid>
+        <UsersLayout title="EDIT USER">
+            <form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <CustomSelect
@@ -144,8 +141,8 @@ const UsersEdit: React.FC = () => {
                         </>
                     )}
                 </Grid>
-            </Grid>
-        </form>
+            </form>
+        </UsersLayout>
     );
 };
 
