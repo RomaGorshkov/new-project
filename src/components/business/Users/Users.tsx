@@ -20,7 +20,7 @@ import { deleteUser } from '../../../store/reducers/user';
 
 import AddUserModal from '../../shared/AddUserModal/AddUserModal';
 import CustomSelect from '../../shared/CustomSelect/CustomSelect';
-import UsersLayout from '../../../layouts/usersLayout';
+import UsersLayout from '../../../layouts/UsersLayout';
 
 import { addUserID } from '../../../utils/addUserId';
 import { searchFilter } from '../../../utils/searchFilter';

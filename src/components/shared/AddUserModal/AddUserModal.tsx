@@ -4,7 +4,7 @@ import { Button, Grid, Modal, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 
 import { addUser } from '../../../store/reducers/user';
-import { validationUserSchema } from '../../../yupSchema/yupSchema';
+import { validationAddUserSchema } from '../../../yupSchema/yupSchema';
 import CustomSelect from '../CustomSelect/CustomSelect';
 
 import styles from './AddUserModal.module.scss';
@@ -28,9 +28,8 @@ const AddUserModal: React.FC<IAddUserModalProps> = ({ open, setOpen, department,
             stateDepartment: '',
             stateCountry: '',
             stateStatus: '',
-            selectedUser: '',
         },
-        validationSchema: validationUserSchema,
+        validationSchema: validationAddUserSchema,
         onSubmit: (values) => {
             setIsLoading(true);
             setTimeout(() => {

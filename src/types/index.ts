@@ -21,10 +21,15 @@ interface ICountry {
     value: string;
 }
 
-export interface IValidationUserSchema {
+export interface IValidationBaseUserSchema {
     fullName: string;
     stateDepartment: string;
     stateCountry: string;
     stateStatus: string;
+}
+
+export type IValidationAddUserSchema = IValidationBaseUserSchema;
+
+export interface IValidationEditUserSchema extends IValidationBaseUserSchema {
     selectedUser: string;
 }
