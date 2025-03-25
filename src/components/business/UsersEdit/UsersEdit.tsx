@@ -1,19 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Grid, TextField, Button } from '@mui/material';
 import { useFormik } from 'formik';
 
 import { useAppDispatch, useAppSelector } from '../../../store/storeHooks';
 import useUserFilters from '../../../utils/getFilter';
+import { updateUser } from '../../../store/reducers/user';
+import { validationEditUserSchema } from '../../../yupSchema/yupSchema';
 
 import CustomSelect from '../../shared/CustomSelect/CustomSelect';
-import { updateUser } from '../../../store/reducers/user';
-import UsersLayout from '../../../layouts/usersLayout';
+import UsersLayout from '../../../layouts/UsersLayout';
 
 import styles from './UsersEdit.module.scss';
 
 const UsersEdit: React.FC = () => {
-    const [editMode, setEditMode] = React.useState(false);
-
+    const navigate = useNavigate();
     const { users } = useAppSelector((state) => state.userReducer);
     const dispatch = useAppDispatch();
 
@@ -29,6 +30,7 @@ const UsersEdit: React.FC = () => {
             stateStatus: '',
             selectedUser: '',
         },
+        validationSchema: validationEditUserSchema,
         onSubmit: (values) => {
             const user = users.find((u) => u.name === values.selectedUser);
             if (user) {
@@ -40,7 +42,6 @@ const UsersEdit: React.FC = () => {
                 };
                 dispatch(updateUser({ ...user, ...updatedUser }));
                 formik.resetForm({ values: { ...formik.initialValues, selectedUser: '' } });
-                setEditMode(false);
             }
         },
     });
@@ -58,10 +59,21 @@ const UsersEdit: React.FC = () => {
                 formik.resetForm({
                     values: { selectedUser: user.name, ...newValues },
                 });
-                setEditMode(true);
             }
         }
     }, [formik.values.selectedUser]);
+
+    const handleResetForm = () => {
+        formik.resetForm({
+            values: {
+                fullName: '',
+                stateDepartment: '',
+                stateCountry: '',
+                stateStatus: '',
+                selectedUser: '',
+            },
+        });
+    };
 
     return (
         <UsersLayout title="EDIT USER">
@@ -76,70 +88,60 @@ const UsersEdit: React.FC = () => {
                             formik={formik}
                         />
                     </Grid>
-                    {editMode && (
-                        <>
-                            <Grid item xs={12} className={styles.usersEdit__sectionTitle}>
-                                User Information
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    sx={{ width: '250px' }}
-                                    label="Full Name"
-                                    name="fullName"
-                                    value={formik.values.fullName}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <CustomSelect
-                                    sx={{ width: '250px' }}
-                                    name="stateDepartment"
-                                    label="Department"
-                                    options={department}
-                                    formik={formik}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <CustomSelect
-                                    sx={{ width: '250px' }}
-                                    name="stateCountry"
-                                    label="Country"
-                                    options={country}
-                                    formik={formik}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <CustomSelect
-                                    sx={{ width: '250px' }}
-                                    name="stateStatus"
-                                    label="Status"
-                                    options={status}
-                                    formik={formik}
-                                />
-                            </Grid>
-                            <Grid item xs={12} className={styles.usersEdit__buttons}>
-                                <Button
-                                    variant="outlined"
-                                    className={styles.usersEdit__undo}
-                                    onClick={() => {
-                                        formik.resetForm({ values: { ...formik.initialValues, selectedUser: '' } });
-                                        setEditMode(false);
-                                    }}
-                                >
-                                    Undo
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    className={styles.usersEdit__save}
-                                    disabled={!formik.dirty || !formik.isValid}
-                                    type="submit"
-                                >
-                                    Save
-                                </Button>
-                            </Grid>
-                        </>
-                    )}
+                    <Grid item xs={12} className={styles.usersEdit__sectionTitle}>
+                        User Information
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            sx={{ width: '250px' }}
+                            label="Full Name"
+                            name="fullName"
+                            value={formik.values.fullName}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <CustomSelect
+                            sx={{ width: '250px' }}
+                            name="stateDepartment"
+                            label="Department"
+                            options={department}
+                            formik={formik}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <CustomSelect
+                            sx={{ width: '250px' }}
+                            name="stateCountry"
+                            label="Country"
+                            options={country}
+                            formik={formik}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <CustomSelect
+                            sx={{ width: '250px' }}
+                            name="stateStatus"
+                            label="Status"
+                            options={status}
+                            formik={formik}
+                        />
+                    </Grid>
+                    <Grid item xs={12} className={styles.usersEdit__buttons}>
+                        <Button variant="outlined" className={styles.usersEdit__undo} onClick={handleResetForm}>
+                            Undo
+                        </Button>
+                        <Button
+                            variant="contained"
+                            className={styles.usersEdit__save}
+                            disabled={!formik.dirty || !formik.isValid}
+                            type="submit"
+                            onClick={() => navigate('/')}
+                        >
+                            Save
+                        </Button>
+                    </Grid>
                 </Grid>
             </form>
         </UsersLayout>
