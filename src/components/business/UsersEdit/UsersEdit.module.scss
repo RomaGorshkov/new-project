@@ -1,0 +1,28 @@
+.usersEdit {
+    &__sectionTitle {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+
+        button {
+            margin-left: 10px;
+            width: 120px;
+        }
+    }
+
+    &__undo {
+        border-color: #000;
+        color: #000;
+    }
+
+    &__save {
+        background-color: #ddd;
+        color: #888;
+    }
+}

@@ -9,4 +9,7 @@ export const validationUserSchema: Yup.ObjectSchema<IValidationUserSchema> = Yup
     stateDepartment: Yup.string().required('Department is required'),
     stateCountry: Yup.string().required('Country is required'),
     stateStatus: Yup.string().required('Status is required'),
+    selectedUser: Yup.string()
+        .matches(/^[A-ZА-ЯІЇЄҐ][a-zа-яіїєґ']+\s[A-ZА-ЯІЇЄҐ][a-zа-яіїєґ']+$/, 'Format: Name Surname (Both capitalized)')
+        .required('User is required'),
 });
