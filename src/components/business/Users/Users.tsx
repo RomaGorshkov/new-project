@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Button,
     Grid,
@@ -22,7 +23,6 @@ import AddUserModal from '../../shared/AddUserModal/AddUserModal';
 import CustomSelect from '../../shared/CustomSelect/CustomSelect';
 import UsersLayout from '../../../layouts/UsersLayout';
 
-import { addUserID } from '../../../utils/addUserId';
 import { searchFilter } from '../../../utils/searchFilter';
 import { IUsers } from '../../../types';
 import useUserFilters from '../../../utils/getFilter';
@@ -39,6 +39,8 @@ const Users: React.FC = () => {
     const [filteredUsers, setFilteredUsers] = React.useState<IUsers[]>(users);
 
     const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
 
     const { department, country, status } = useUserFilters();
 
@@ -66,7 +68,6 @@ const Users: React.FC = () => {
     });
 
     React.useEffect(() => {
-        addUserID(users);
         const filtered = searchFilter(users, {
             ...formik.values,
             fullName: debouncedSearchText,
@@ -139,14 +140,21 @@ const Users: React.FC = () => {
                         <TableBody>
                             {filteredUsers.length ? (
                                 filteredUsers.map((user) => (
-                                    <TableRow key={user.id}>
+                                    <TableRow
+                                        key={user.id}
+                                        onClick={() => navigate(`/user/${user.id}`)}
+                                        sx={{ cursor: 'pointer' }}
+                                    >
                                         <TableCell>{user.name}</TableCell>
                                         <TableCell>{user.department.name}</TableCell>
                                         <TableCell>{user.country.name}</TableCell>
                                         <TableCell>{user.status.name}</TableCell>
                                         <TableCell>
                                             <DeleteIcon
-                                                onClick={() => handleDelete(user.id)}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleDelete(user.id);
+                                                }}
                                                 className={styles.users__deleteButton}
                                             />
                                         </TableCell>

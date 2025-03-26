@@ -28,6 +28,7 @@ const AddUserModal: React.FC<IAddUserModalProps> = ({ open, setOpen, department,
             stateDepartment: '',
             stateCountry: '',
             stateStatus: '',
+            selectedUser: '',
         },
         validationSchema: validationAddUserSchema,
         onSubmit: (values) => {

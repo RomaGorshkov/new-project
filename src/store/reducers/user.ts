@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 import { IUsers } from '../../types';
 
@@ -19,7 +19,8 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         addUser: (state, action) => {
-            state.users.push(action.payload);
+            const newUser = { ...action.payload, id: nanoid() };
+            state.users.push(newUser);
             localStorage.setItem('users', JSON.stringify(state.users));
         },
         deleteUser(state, action) {
@@ -36,9 +37,14 @@ export const userSlice = createSlice({
                 localStorage.setItem('users', JSON.stringify(state.users));
             }
         },
+        uploadUserPicture: (state, action) => {
+            const { userId, imageUrl } = action.payload;
+            state.users = state.users.map((user) => (user.id === userId ? { ...user, image: imageUrl } : user));
+            localStorage.setItem('users', JSON.stringify(state.users));
+        },
     },
 });
 
-export const { addUser, deleteUser, updateUser } = userSlice.actions;
+export const { addUser, deleteUser, updateUser, uploadUserPicture } = userSlice.actions;
 
 export default userSlice.reducer;
