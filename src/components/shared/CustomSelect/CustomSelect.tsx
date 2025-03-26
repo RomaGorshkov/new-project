@@ -2,21 +2,21 @@ import React from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { FormikProps } from 'formik';
 
-import { IValidationUserSchema } from '../../../types';
+import { IValidationEditUserSchema } from '../../../types';
 
 import { SxProps, Theme } from '@mui/system';
 
 interface ICustomSelectProps {
     sx?: SxProps<Theme>;
-    name: keyof IValidationUserSchema;
+    name: keyof IValidationEditUserSchema;
     label: string;
     options: string[];
-    formik: FormikProps<IValidationUserSchema>;
+    formik: FormikProps<IValidationEditUserSchema>;
 }
 
 const CustomSelect: React.FC<ICustomSelectProps> = ({ sx, name, label, options, formik }) => {
     return (
-        <FormControl required error={formik?.touched[name] && Boolean(formik.errors[name])}>
+        <FormControl required error={formik.touched[name] && Boolean(formik.errors[name])}>
             <InputLabel id={`${name}-label`}>{label}</InputLabel>
             <Select
                 sx={sx}

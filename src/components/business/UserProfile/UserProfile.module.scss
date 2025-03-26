@@ -1,0 +1,72 @@
+.userProfile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    &__content {
+        background: #fff;
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        max-width: 500px;
+    }
+    &__avatar {
+        position: relative;
+        width: 220px;
+        height: 220px;
+        margin: 0 auto 24px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            border: 6px solid #fff;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+        }
+
+        &:hover .userProfile__uploadButton {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    &__uploadButton {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        opacity: 0;
+        transform: translateY(10px);
+
+        &:hover {
+            background: #f0f0f0;
+        }
+    }
+    &__uploadInput {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+    &__name {
+        font-weight: 700;
+        font-size: 2rem;
+        color: #333;
+    }
+    &__info {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 6px;
+    }
+}

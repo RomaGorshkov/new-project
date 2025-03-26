@@ -1,6 +1,7 @@
 export interface IUsers {
     id: string;
     name: string;
+    image?: string;
     status: IStatus;
     department: IDepartment;
     country: ICountry;

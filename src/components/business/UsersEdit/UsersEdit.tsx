@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from '../../../store/storeHooks';
 import useUserFilters from '../../../utils/getFilter';
 import { updateUser } from '../../../store/reducers/user';
-import { validationEditUserSchema } from '../../../yupSchema/yupSchema';
 
 import CustomSelect from '../../shared/CustomSelect/CustomSelect';
 import UsersLayout from '../../../layouts/UsersLayout';
@@ -30,7 +29,6 @@ const UsersEdit: React.FC = () => {
             stateStatus: '',
             selectedUser: '',
         },
-        validationSchema: validationEditUserSchema,
         onSubmit: (values) => {
             const user = users.find((u) => u.name === values.selectedUser);
             if (user) {
