@@ -97,6 +97,7 @@ const UsersEdit: React.FC = () => {
                             value={formik.values.fullName}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
+                            disabled={!formik.values.selectedUser}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -106,6 +107,7 @@ const UsersEdit: React.FC = () => {
                             label="Department"
                             options={department}
                             formik={formik}
+                            disabled={!formik.values.selectedUser}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -115,6 +117,7 @@ const UsersEdit: React.FC = () => {
                             label="Country"
                             options={country}
                             formik={formik}
+                            disabled={!formik.values.selectedUser}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -124,6 +127,7 @@ const UsersEdit: React.FC = () => {
                             label="Status"
                             options={status}
                             formik={formik}
+                            disabled={!formik.values.selectedUser}
                         />
                     </Grid>
                     <Grid item xs={12} className={styles.usersEdit__buttons}>
