@@ -12,9 +12,10 @@ interface ICustomSelectProps {
     label: string;
     options: string[];
     formik: FormikProps<IValidationEditUserSchema>;
+    disabled?: boolean;
 }
 
-const CustomSelect: React.FC<ICustomSelectProps> = ({ sx, name, label, options, formik }) => {
+const CustomSelect: React.FC<ICustomSelectProps> = ({ sx, name, label, options, formik, disabled }) => {
     return (
         <FormControl required error={formik.touched[name] && Boolean(formik.errors[name])}>
             <InputLabel id={`${name}-label`}>{label}</InputLabel>
@@ -26,6 +27,7 @@ const CustomSelect: React.FC<ICustomSelectProps> = ({ sx, name, label, options, 
                 value={formik.values[name]}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={disabled}
             >
                 {options.map((option, index) => (
                     <MenuItem key={index} value={option}>
